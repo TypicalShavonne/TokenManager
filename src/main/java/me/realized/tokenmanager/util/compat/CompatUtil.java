@@ -9,11 +9,13 @@ public final class CompatUtil {
 
     static {
         final String packageName = Bukkit.getServer().getBukkitVersion().split("\\.")[1];
-        SUB_VERSION = NumberUtil.parseLong(packageName).orElse(0);
+        SUB_VERSION = NumberUtil.parseLong(packageName.replace("-R0", "")).orElse(0);
     }
 
     private CompatUtil() {}
-
+    public static boolean isAfter1_20() {
+        return SUB_VERSION > 20;
+    }
     public static boolean isPre1_17() {
         return SUB_VERSION < 17;
     }
