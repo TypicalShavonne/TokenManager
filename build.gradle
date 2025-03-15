@@ -51,7 +51,7 @@ repositories {
     }*/
 
     maven {
-        url = 'https://repo.extendedclip.com/content/repositories/placeholderapi/'
+        url = 'https://repo.extendedclip.com/releases/'
     }
 
     maven {
@@ -72,22 +72,18 @@ repositories {
 }
 
 dependencies {
-    compileOnly 'org.projectlombok:lombok:1.18.24'
-    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+    compileOnly 'org.projectlombok:lombok:1.18.36'
+    annotationProcessor 'org.projectlombok:lombok:1.18.36'
 
     compileOnly 'org.spigotmc:spigot-api:1.14.4-R0.1-SNAPSHOT'
-    compileOnly (name: 'MVdWPlaceholderAPI-3.1.1') {
-        transitive = false
-    }
     compileOnly "com.github.MilkBowl:VaultAPI:1.7"
-    compileOnly 'me.clip:placeholderapi:2.10.9'
+    compileOnly 'me.clip:placeholderapi:2.11.6'
 
     // shaded dependencies
     implementation 'redis.clients:jedis:5.1.2'
     implementation 'org.apache.commons:commons-pool2:2.12.0'
     implementation 'com.zaxxer:HikariCP:4.0.3'
     implementation 'org.slf4j:slf4j-nop:2.0.13'
-    implementation 'org.bstats:bstats-bukkit:3.0.2'
 }
 
 clean.doFirst {
@@ -108,7 +104,6 @@ shadowJar {
         include(dependency('org.apache.commons:.*'))
         include(dependency('com.zaxxer:.*'))
         include(dependency('org.slf4j:.*'))
-        include(dependency('org.bstats:.*'))
     }
 
     def group = project.group.toString() + "." + project.name.toLowerCase() + ".shaded."
@@ -117,7 +112,6 @@ shadowJar {
     relocate 'org.apache.commons.pool2', group + 'apache.commons.pool2'
     relocate 'com.zaxxer.hikari', group + 'zaxxer.hikari'
     relocate 'org.slf4j', group + "slf4j"
-    relocate 'org.bstats', group + 'bstats'
 }
 
 build.dependsOn(shadowJar)
